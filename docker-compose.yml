@@ -1,0 +1,35 @@
+version: "3.7" 
+
+services:
+  web:
+    container_name: "web"
+    build:
+      dockerfile: "./container/web/Dockerfile"
+    ports:
+      - "8080:80"
+    volumes:
+      - "./src:/var/www/html"
+
+  php:
+    container_name: "php"
+    build:
+      dockerfile: "./container/php/Dockerfile"
+    volumes:
+      - "./src:/var/www/html"
+
+  db:
+    container_name: "db"
+    build:
+      dockerfile: "./container/db/Dockerfile"
+    ports:
+      - "3306:3306"
+    environment:
+      - "MYSQL_ROOT_PASSWORD=password"
+      - "MYSQL_DATABASE=database"
+      - "MYSQL_USER=laravel"
+      - "MYSQL_PASSWORD=password"
+    volumes:
+      - "db:/var/lib/mysql"
+
+volumes:
+  db:
