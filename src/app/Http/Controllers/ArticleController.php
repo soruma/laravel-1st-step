@@ -112,7 +112,7 @@ class ArticleController extends Controller
     }
 
     public function bookmark_articles() {
-        $articles = \Auth->user()->bookmark_articles()->orderBy('create_at', 'desc')->paginate(10);
+        $articles = \Auth::user()->bookmark_articles()->orderBy('created_at', 'desc')->paginate(10);
         $data = [
             'articles' => $articles,
         ];
